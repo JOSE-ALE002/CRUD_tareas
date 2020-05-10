@@ -1,0 +1,67 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Menu</title>
+
+	<!-- Boostrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark mb-4">
+		<a href="/" class="navbar-brand">CRUD NodeMongo</a>
+    </nav>
+
+    <div class="container">
+    	<div class="row">
+    		<!-- FORM -->
+    		<div class="col-md-5">
+    			<div class="card">
+    				<div class="card-body">
+    					<form action="/add" method="POST">
+    						<div class="form-group">
+    							<input type="text" name="title" placeholder="Insert a title" class="form-control">
+    						</div>
+
+    						<div class="form-group">
+    							<textarea name="description", cols="80", class="form-control", placeholder="Insert a Description"></textarea>
+    						</div>
+
+    						<button type="submit" class="btn btn-primary btn-block">Add</button>
+    					</form>
+    				</div>
+    			</div>
+    		</div>
+			
+			<!-- LIST -->
+    		<div class="col-md-7">
+    			<table class="table table-bordered table-hover">
+    				<thead>
+    					<th>Nº</th>
+    					<th>Title</th>
+    					<th>Description</th>
+    					<th>Operation</th>
+    				</thead>
+    				<tbody>
+                      <%for(var i = 0; i < tasks.length; i++) {%>
+                           <tr>
+                               <td><%=i+1%></td>
+                               <td><%=tasks[i].title%></td>
+                               <td><%=tasks[i].description%></td>
+                               <td>
+                                   <a href="/turn/<%=tasks[i]._id%>" 
+                                    class="btn <%=tasks[i].status ? 'btn-success' : 'btn-dark' %>">Done</a>
+
+                                   <a href="/delete/<%=tasks[i]._id%>" class="btn btn-danger">Delete</a>
+
+                                   <a href="/edit/<%=tasks[i]._id%>" class="btn btn-info">Edit</a>
+                               </td>
+                           </tr>
+                        <%}%>
+    				</tbody>
+    			</table>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>
